@@ -128,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -188,18 +189,4 @@ CACHES = {
         'LOCATION': 'cache_table',
     }
 }
-
-# Dynamically add new AWS host IP to allow
-import requests
-EC2_PRIVATE_IP = None
-try:
-    EC2_PRIVATE_IP = requests.get(
-        'http://169.254.169.254/latest/meta-data/local-ipv4',
-        timeout=0.01).text
-except requests.exceptions.RequestException:
-    pass
-
-if EC2_PRIVATE_IP:
-    if EC2_PRIVATE_IP not in ALLOWED_HOSTS:
-        ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 

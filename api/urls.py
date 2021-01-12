@@ -3,7 +3,7 @@ from django.urls import path, include, re_path
 from rest_framework import routers
 
 from api import views
-from api.views_auth_token import obtain_auth_token_custom
+# from api.views_auth_token import obtain_auth_token_custom
 
 router = routers.DefaultRouter()
 router.register(r'encrypt', views.EncryptViewSet, basename='Encrypt')
@@ -16,5 +16,5 @@ urlpatterns = [
     re_path(r'^', include(router.urls)),
     re_path(r'^api-auth/', include('rest_framework.urls')),
     # path('api-token-auth/', obtain_auth_token, name='api_token_auth'), # Standard
-    path('api-token-auth/', obtain_auth_token_custom, name='api_token_auth'),
+    # path('api-token-auth/', obtain_auth_token_custom, name='api_token_auth'),
 ]
